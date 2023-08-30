@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: Budget-app
+spec:
+  selector:
+    matchLabels:
+      app: Budget-app
+  template:
+    metadata:
+      labels:
+        app: Budget-app
+    spec:
+      containers:
+      - name: Budget-app
+        image: rghdrizzle/rubyapp
+        ports:
+        - containerPort: 3000
+        volumeMounts:
+        - mountPath: /cache
+          name: app-cache-volume
+      env:
+        DB_HOST: db
+        DB_NAME:  Budgy_production
+        DB_USERNAME: Budgy
+        DB_PASSWORD: postgres
+      volumes:
+      - name: app-cache-volume
+        emptyDir:
+          sizeLimit: 500Mi

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: Budget-service
+spec:
+  selector:
+    app: Budget-app
+  ports:
+  - port: 3000
+    targetPort: 3000
+  type: LoadBalancer
