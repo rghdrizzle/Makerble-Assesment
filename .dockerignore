@@ -1,0 +1,8 @@
+.git
+.gitignore
+log/*
+tmp/*
+node_modules
+public/packs
+public/packs-test
+yarn-error.log
