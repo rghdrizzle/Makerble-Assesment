@@ -1,0 +1,24 @@
+version: 2.1
+jobs:
+  docker-push:
+    machine:
+      image: ubuntu-2004:current
+    steps:
+      - checkout
+      - run: 
+          command: |
+            echo "$DOCKERHUB_PASSWORD" | docker login -u "$mydockerhub_user" --password-stdin
+            docker build -t rubyapp .
+            docker tag rubyapp rghdrizzle/rubyapp:latest
+            docker push rghdrizzle/rubyapp:latest
+      - run:
+          name: "Docker Logout"
+          when: always
+          command: docker logout
+workflows:
+  build-push:
+    jobs:
+      - docker-push:
+          filters:
+              tags:
+                only: /^d.*/ 
