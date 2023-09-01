@@ -21,4 +21,6 @@ workflows:
       - docker-push:
           filters:
               tags:
-                only: /^d.*/ 
+                only: /^d.*/
+              branches:
+                ignore: main
